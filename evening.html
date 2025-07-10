@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>أذكار المساء</title>
+  <style>
+    body {
+      background: linear-gradient(135deg,#0a0a0a,#0d1b2a);
+      color: #fff;
+      font-family: 'Segoe UI',sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #3ca2ff;
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+    .box {
+      background: #111;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .text {
+      font-size: 18px;
+      color: #76baff;
+      margin-bottom: 10px;
+    }
+    .counter {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .btn {
+      background: #113f67;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(60,162,255,0.3);
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #0b2c4d;
+    }
+    a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌇 أذكار المساء</h1>
+
+  <div class="box">
+    <div class="text">أمسينا وأمسى الملك لله</div>
+    <div class="counter" id="c1">0</div>
+    <button class="btn" onclick="inc(1)">سَبِّح</button>
+  </div>
+
+  <div class="box">
+    <div class="text">اللهم بك أمسينا وبك نحيا</div>
+    <div class="counter" id="c2">0</div>
+    <button class="btn" onclick="inc(2)">سَبِّح</button>
+  </div>
+
+  <div class="box">
+    <div class="text">أعوذ بكلمات الله التامات من شر ما خلق</div>
+    <div class="counter" id="c3">0</div>
+    <button class="btn" onclick="inc(3)">سَبِّح</button>
+  </div>
+
+  <a href="index.html">↩️ العودة للرئيسية</a>
+
+  <script>
+    const counts = {};
+    function inc(i) {
+      const key = `e${i}`;
+      counts[key] = (counts[key] || 0) + 1;
+      document.getElementById(`c${i}`).innerText = counts[key];
+      localStorage.setItem(key, counts[key]);
+    }
+
+    window.onload = () => {
+      for (let i = 1; i <= 10; i++) {
+        const key = `e${i}`;
+        const v = localStorage.getItem(key);
+        if (v) {
+          counts[key] = parseInt(v);
+          const el = document.getElementById(`c${i}`);
+          if (el) el.innerText = counts[key];
+        }
+      }
+    }
+  </script>
+</body>
+</html>
