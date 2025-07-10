@@ -32,6 +32,8 @@
     .nav-buttons .btn {
       width: 200px;
       margin: 0;
+      background: transparent;
+      border: 2px solid #3ca2ff;
     }
     .box {
       background: #111;
@@ -84,6 +86,11 @@
         max-width: 300px;
         font-size: 18px;
         padding: 15px 24px;
+        background: transparent;
+        border: 2px solid #3ca2ff;
+      }
+      .nav-buttons .btn:hover {
+        background: rgba(60, 162, 255, 0.1);
       }
       .container {
         flex-direction: column;
@@ -156,6 +163,12 @@
     </div>
   </div>
 
+  <div style="margin-top: 40px;">
+    <button class="btn" onclick="resetAll()" style="background: #dc3545; font-size: 18px; padding: 15px 30px; border-radius: 12px;">
+      🔄 تصفير العدادات
+    </button>
+  </div>
+
   <script>
     const counts = {};
     function inc(i) {
@@ -163,6 +176,18 @@
       counts[key] = (counts[key] || 0) + 1;
       document.getElementById(`c${i}`).innerText = counts[key];
       localStorage.setItem(key, counts[key]);
+    }
+
+    function resetAll() {
+      if (confirm('هل أنت متأكد من إعادة تعيين جميع العدادات؟')) {
+        for (let i = 1; i <= 6; i++) {
+          const key = `z${i}`;
+          counts[key] = 0;
+          document.getElementById(`c${i}`).innerText = 0;
+          localStorage.removeItem(key);
+        }
+        alert('تم إعادة تعيين جميع العدادات بنجاح ✅');
+      }
     }
 
     window.onload = () => {
